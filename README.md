@@ -70,7 +70,8 @@ Object detection is a crucial area of ​​computer vision and robotics, with a
       pip install -r requirements.txt
    ```
 
-4. Download [ROS](http://wiki.ros.org/noetic)
+4. Download [ROS](https://www.ros.org/blog/getting-started/)
+   Make sure to choose the appropriate version based on the operating system you are using (Linux or Windows)
 
 ### Ros Installation
 
