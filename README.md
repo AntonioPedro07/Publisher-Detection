@@ -131,3 +131,21 @@ To view the data published in the /distance, /almost_hit, and /warning topics, u
    ```
    rostopic echo /distance
    ```
+
+2. /almost_hit: This topic publishes warnings when the robot is about to collide with an object.
+   ```
+   rostopic echo /almost_hit
+   ```
+
+3. /warning: This topic publishes general warnings related to object detection
+   ```
+   rostopic echo /warning
+   ```
+
+## Contribution
+
+Feel free to open issues and submit pull requests. Contributions are welcome!
+
+## License
+
+Publisher-Detection is licensed under the MIT License - see the [LICENSE](https://github.com/AntonioPedro07/YoloKeras-Detection/blob/main/LICENSE) file for more details.
