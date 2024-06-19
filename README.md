@@ -7,16 +7,15 @@ This project was developed by António Pedro Silva Matos using ROS (Robot Operat
 1. [**Introduction**](#introduction)
 2. [**Overview**](#overview)
 3. [**Functionalities**](#functionalities)
-4. [**Configuration**](#configuration)
-5. [**Requirements**](#requirements)
-6. [**Preperation**](#preperation)
+4. [**Requirements**](#requirements)
+5. [**Preperation**](#preperation)
    - [**Installation**](#installation)
-   - [**ROS Installation**](#installation-ros)
-7. [**Usage**](#usage)
-   - [**Start detection node**](#start-detection-node)
+   - [**ROS Installation**](#ros-installation)
+6. [**Usage**](#usage)
+   - [**Start Detection Node**](#start-detection-node)
    - [**View Topics**](#view-topics)
-8. [**Contribution**](#contribution)
-9. [**License**](#license)
+7. [**Contribution**](#contribution)
+8. [**License**](#license)
 
 ## Introduction
 
@@ -51,3 +50,84 @@ Object detection is a crucial area of ​​computer vision and robotics, with a
 - OpenCV 4.x
 
 - ROS Noetic (or other version compatible)
+
+# Preperation
+
+### Installation
+
+1. Clone the repository:
+   ```
+      git clone https://github.com/AntonioPedro07/Publisher-Detection.git
+   ```
+
+2. Navigate to the project directory:
+   ```
+      cd Publisher-Detection
+   ```
+
+3. Install the dependencies:
+   ```
+      pip install -r requirements.txt
+   ```
+
+### Ros Installation
+
+1. Configure ROS Source:
+   ```
+   sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+   sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+   sudo apt update
+   ```
+
+2. Install ROS Noetic:
+   ```
+   sudo apt install ros-noetic-desktop-full
+   ```
+
+3. Inicializar rosdep:
+   ```
+   sudo rosdep init
+   rosdep update
+   ```
+
+4. Configure ROS Environment:
+   Add the following lines to your ~/.bashrc file
+   ```
+   echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+5. Install dependencies to build ROS packages:
+   ```
+   sudo apt install python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+   ```
+
+6. Create and configure a catkin workspace:
+   ```
+   mkdir -p ~/catkin_ws/src
+   cd ~/catkin_ws/
+   catkin_make
+   ```
+   Add the following line to your ~/.bashrc file:
+   ```
+   echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+# Usage
+
+### Start detection Node
+
+To start the detection node and publish the results to ROS topics, run:
+```
+roslaunch publisher_detection detection.launch
+```
+
+### View Topics
+
+To view the data published in the /distance, /almost_hit, and /warning topics, use the following commands:
+
+1. /distance: This topic publishes the distance between the robot and detected objects
+   ```
+   rostopic echo /distance
+   ```
