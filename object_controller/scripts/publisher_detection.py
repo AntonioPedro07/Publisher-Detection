@@ -14,7 +14,7 @@ class ObjectDetector:
         rospy.init_node('object_detector', anonymous=True)
 
         # Publisher for distance, almost hit warning and general warnings
-        self.distance_pub = rospy.Publisher('distance', String, queue_size=10)
+        self.distance_pub = rospy.Publisher('distance', Float32, queue_size=10)
         self.almost_hit_pub = rospy.Publisher('almost_hit', Bool, queue_size=10)
         self.warning_pub = rospy.Publisher('warning', String, queue_size=10)
 
@@ -40,11 +40,10 @@ class ObjectDetector:
                 min_distance = distance
 
         # Format the distance to two decimal place with the unit
-        distance_str = f"{min_distance:.2f} m"
-        rospy.loginfo(f"Distance: {distance_str}")
+        rospy.loginfo(f"Distance: {distance}")
 
         # Publish the formatted distance string
-        self.distance_pub.publish(distance_str)
+        self.distance_pub.publish(distance)
 
         # Determine if the object is almost hit based on the threshold
         almost_hit = min_distance < self.threshold_hit
@@ -53,13 +52,13 @@ class ObjectDetector:
         # Publish appropriate warnings based on the distance
         if min_distance < self.threshold_hit:
             self.warning_pub.publish("FATAL")
-            rospy.loginfo("Imminent Danger!!: Object is very close!")
+            rospy.loginfo("Imminent Danger!!: Object is very close!\n")
         elif min_distance < self.threshold_warning:
             self.warning_pub.publish("WARNING")
-            rospy.loginfo("Warning!!: Object is close!")
+            rospy.loginfo("Warning!!: Object is close!\n")
         else:
             self.warning_pub.publish("CLEAR")
-            rospy.loginfo("No danger detected")
+            rospy.loginfo("No danger detected\n")
 
     def depth_image_callback(self, data):
         try:
@@ -68,7 +67,7 @@ class ObjectDetector:
 
             # Check if the image data is all zeros 
             if np.all(cv_image == 0):
-                rospy.logwarn("Depth image data is all zeros")
+                rospy.logwarn("Depth image data is all zeros\n")
             else:
                 # Normalize the depth image for visualization
                 cv_image_norm = cv2.normalize(cv_image, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
