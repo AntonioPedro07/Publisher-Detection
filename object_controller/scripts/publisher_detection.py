@@ -40,7 +40,7 @@ class ObjectDetector:
                 min_distance = distance
 
         # Format the distance to two decimal place with the unit
-        rospy.loginfo(f"Distance: {distance}")
+        rospy.loginfo(f"Distance: {min_distance}")
 
         # Publish the formatted distance string
         self.distance_pub.publish(distance)
